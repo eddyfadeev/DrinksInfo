@@ -1,4 +1,4 @@
-﻿using DrinksInfo.Model;
+﻿using DrinksInfo.Models;
 
 namespace DrinksInfo.Interfaces.Model;
 

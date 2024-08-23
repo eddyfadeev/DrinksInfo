@@ -3,9 +3,10 @@ using System.Text;
 using DrinksInfo.Enums;
 using DrinksInfo.Exceptions;
 using DrinksInfo.Interfaces.Handlers;
-using DrinksInfo.Model;
+using DrinksInfo.Models;
 using DrinksInfo.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -19,7 +20,10 @@ internal static class Program
         var serviceProvider = services.BuildServiceProvider();
         
         var menuEntriesHandler = serviceProvider.GetRequiredService<IMenuEntriesHandler<MainMenuEntries>>();
-
+        var apiConfig = serviceProvider.GetRequiredService<IOptions<ApiConfig>>();
+        Console.WriteLine($"Base API URL: {apiConfig.Value.BaseUrl}");
+        
+        
         while (true)
         {
             try
@@ -63,6 +67,4 @@ internal static class Program
         //     Console.WriteLine(drink.Measures?[0]);
         // }
     }
-
-    
 }

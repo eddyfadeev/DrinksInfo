@@ -1,7 +1,7 @@
 ﻿using DrinksInfo.Interfaces.Model;
 using Newtonsoft.Json;
 
-namespace DrinksInfo.Model;
+namespace DrinksInfo.Models;
 
 internal class Drinks: IDrinks
 {

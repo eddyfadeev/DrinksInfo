@@ -2,7 +2,7 @@
 using DrinksInfo.Mappers;
 using Newtonsoft.Json;
 
-namespace DrinksInfo.Model;
+namespace DrinksInfo.Models;
 
 [JsonConverter(typeof(DrinkMapper))]
 internal class Drink : IDrink

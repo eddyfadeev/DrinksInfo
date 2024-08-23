@@ -1,4 +1,4 @@
-﻿using DrinksInfo.Model;
+﻿using DrinksInfo.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
