@@ -1,8 +1,8 @@
 ﻿using DrinksInfo.Interfaces.View;
 
-namespace DrinksInfo.View.Commands.MainMenuCommands;
+namespace DrinksInfo.View.Commands.FilterMenuCommands;
 
-public class GetRandomDrinkCommand : ICommand
+internal class FilterByAlcoNonAlcoCommand : ICommand
 {
     public void Execute()
     {

@@ -4,14 +4,16 @@ namespace DrinksInfo.Enums;
 
 internal enum SearchMenuEntries
 {
+    [Display(Name = "Search by first letter")]
+    SearchByFirstLetter,
     [Display(Name = "Search by name")]
-    Name,
+    SearchByName,
     [Display(Name = "Search by ingredient")]
-    Ingredient,
+    SearchByIngredient,
     [Display(Name = "Search by category")]
-    Category,
+    SearchByCategory,
     [Display(Name = "Search by glass type")]
-    GlassType,
+    SearchByGlassType,
     [Display(Name = "Back")]
     Back
 }

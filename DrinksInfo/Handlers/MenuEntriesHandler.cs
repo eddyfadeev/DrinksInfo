@@ -20,7 +20,7 @@ internal class MenuEntriesHandler<TMenu> : IMenuEntriesHandler<TMenu>
     public void HandleMenu()
     {
         var userChoice = HandleUserChoice(_menuEntries);
-        _menuCommandFactory.GetCommand(userChoice).Execute(null);
+        _menuCommandFactory.GetCommand(userChoice).Execute();
     }
 
     private static TMenu HandleUserChoice(SelectionPrompt<string> menuEntries) =>

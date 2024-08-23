@@ -1,8 +1,8 @@
 ﻿using DrinksInfo.Interfaces.View;
 
-namespace DrinksInfo.View.Commands.MainMenuCommands;
+namespace DrinksInfo.View.Commands.SearchMenuCommands;
 
-public class GetRandomDrinkCommand : ICommand
+internal class SearchByFirstLetterCommand : ICommand
 {
     public void Execute()
     {

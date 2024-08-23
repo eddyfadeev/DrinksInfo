@@ -1,18 +1,20 @@
-﻿using System.Windows.Input;
+﻿using DrinksInfo.Interfaces.View;
+using DrinksInfo.Enums;
+using DrinksInfo.Interfaces.Handlers;
 
 namespace DrinksInfo.View.Commands.MainMenuCommands;
 
-public class OpenFilterByCommand : ICommand
+internal class OpenFilterByCommand : ICommand
 {
-    public bool CanExecute(object? parameter)
+    private readonly IMenuEntriesHandler<FilterMenuEntries> _filterMenuEntriesHandler;
+    
+    public OpenFilterByCommand(IMenuEntriesHandler<FilterMenuEntries> filterMenuEntriesHandler)
     {
-        throw new NotImplementedException();
+        _filterMenuEntriesHandler = filterMenuEntriesHandler;
     }
-
-    public void Execute(object? parameter)
+    
+    public void Execute()
     {
-        throw new NotImplementedException();
+        _filterMenuEntriesHandler.HandleMenu();
     }
-
-    public event EventHandler? CanExecuteChanged;
 }

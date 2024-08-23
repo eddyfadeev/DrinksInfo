@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using DrinksInfo.Enums;
+﻿using DrinksInfo.Interfaces.View;
 using DrinksInfo.Interfaces.View.Factory;
 
 namespace DrinksInfo.View.Factory;

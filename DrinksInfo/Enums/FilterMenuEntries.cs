@@ -5,13 +5,13 @@ namespace DrinksInfo.Enums;
 internal enum FilterMenuEntries
 {
     [Display(Name = "Filter by category")]
-    CategoryFilters,
+    FilterByCategory,
     [Display(Name = "Filter by alcoholic")]
-    AlcoholicFilters,
+    FilterByAlcoNonAlco,
     [Display(Name = "Filter by glass type")]
-    GlassTypeFilters,
+    FilterByGlass,
     [Display(Name = "Filter by ingredient")]
-    IngredientFilters,
+    FilterByIngredient,
     [Display(Name = "Back")]
     Back
 }

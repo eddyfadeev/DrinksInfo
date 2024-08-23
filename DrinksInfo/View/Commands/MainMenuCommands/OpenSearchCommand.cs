@@ -1,18 +1,20 @@
-﻿using System.Windows.Input;
+﻿using DrinksInfo.Interfaces.View;
+using DrinksInfo.Enums;
+using DrinksInfo.Interfaces.Handlers;
 
 namespace DrinksInfo.View.Commands.MainMenuCommands;
 
-public class OpenSearchCommand : ICommand
+internal class OpenSearchCommand : ICommand
 {
-    public bool CanExecute(object? parameter)
+    private readonly IMenuEntriesHandler<SearchMenuEntries> _searchMenuEntriesHandler;
+    
+    public OpenSearchCommand(IMenuEntriesHandler<SearchMenuEntries> searchMenuEntriesHandler)
     {
-        throw new NotImplementedException();
+        _searchMenuEntriesHandler = searchMenuEntriesHandler;
     }
-
-    public void Execute(object? parameter)
+    
+    public void Execute()
     {
-        throw new NotImplementedException();
+        _searchMenuEntriesHandler.HandleMenu();
     }
-
-    public event EventHandler? CanExecuteChanged;
 }

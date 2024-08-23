@@ -1,11 +1,13 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using DrinksInfo.Enums;
+using DrinksInfo.Exceptions;
 using DrinksInfo.Interfaces.Handlers;
 using DrinksInfo.Model;
 using DrinksInfo.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Spectre.Console;
 
 namespace DrinksInfo;
 
@@ -17,7 +19,23 @@ internal static class Program
         var serviceProvider = services.BuildServiceProvider();
         
         var menuEntriesHandler = serviceProvider.GetRequiredService<IMenuEntriesHandler<MainMenuEntries>>();
-        menuEntriesHandler.HandleMenu();
+
+        while (true)
+        {
+            try
+            {
+                menuEntriesHandler.HandleMenu();
+            }
+            catch (ReturnToPreviousMenuException)
+            {
+                // return to the previous menu
+            }
+            catch (ExitApplicationException ex)
+            {
+                AnsiConsole.MarkupLine($"[white]{ ex.Message }[/]");
+                break;
+            }
+        }
         
         // using HttpClient client = new();
         //
