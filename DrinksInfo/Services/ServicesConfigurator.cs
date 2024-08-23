@@ -1,4 +1,6 @@
 ﻿using DrinksInfo.Enums;
+using DrinksInfo.Handlers;
+using DrinksInfo.Interfaces.Handlers;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Interfaces.View.Factory;
 using DrinksInfo.View;
@@ -26,7 +28,11 @@ public static class ServicesConfigurator
         services.AddTransient<IMenuEntriesInitializer<MainMenuEntries>, MainMenuEntriesInitializer>();
 
         services.AddTransient<IMenuEntries<MainMenuEntries>, MenuEntries<MainMenuEntries>>();
+        services.AddTransient<IMenuEntries<FilterMenuEntries>, MenuEntries<FilterMenuEntries>>();
+        services.AddTransient<IMenuEntries<SearchMenuEntries>, MenuEntries<SearchMenuEntries>>();
 
         services.AddSingleton<IMenuEntriesHandler<MainMenuEntries>, MenuEntriesHandler<MainMenuEntries>>();
+        services.AddSingleton<IMenuEntriesHandler<FilterMenuEntries>, MenuEntriesHandler<FilterMenuEntries>>();
+        services.AddSingleton<IMenuEntriesHandler<SearchMenuEntries>, MenuEntriesHandler<SearchMenuEntries>>();
     }
 }

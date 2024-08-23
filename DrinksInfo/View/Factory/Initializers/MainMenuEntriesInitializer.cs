@@ -17,3 +17,4 @@ internal class MainMenuEntriesInitializer : IMenuEntriesInitializer<MainMenuEntr
             { MainMenuEntries.Exit, () => throw new ExitApplicationException()}
         };
 }
+

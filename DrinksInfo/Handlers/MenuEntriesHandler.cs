@@ -1,9 +1,10 @@
 ﻿using DrinksInfo.Extensions;
+using DrinksInfo.Interfaces.Handlers;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Interfaces.View.Factory;
 using Spectre.Console;
 
-namespace DrinksInfo;
+namespace DrinksInfo.Handlers;
 
 internal class MenuEntriesHandler<TMenu> : IMenuEntriesHandler<TMenu>
     where TMenu : Enum
@@ -24,10 +25,4 @@ internal class MenuEntriesHandler<TMenu> : IMenuEntriesHandler<TMenu>
 
     private static TMenu HandleUserChoice(SelectionPrompt<string> menuEntries) =>
         AnsiConsole.Prompt(menuEntries).GetValueFromDisplayName<TMenu>();
-}
-
-internal interface IMenuEntriesHandler<out TMenu>
-    where TMenu : Enum
-{
-    void HandleMenu();
 }
