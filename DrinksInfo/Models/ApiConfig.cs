@@ -2,10 +2,10 @@
 
 internal class ApiConfig
 {
-    public string? BaseUrl { get; set; }
-    public string? RandomCocktail { get; set; }
-    public Dictionary<string, string> Lists { get; set; } = new();
-    public Dictionary<string, string> Search { get; set; } = new();
-    public Dictionary<string, string> Lookup { get; set; } = new();
-    public Dictionary<string, string> Filter { get; set; } = new();
+    public string? BaseUrl { get; init; }
+    public string? RandomCocktail { get; init; }
+    public Dictionary<string, string> Lists { get; init; } = new();
+    public Dictionary<string, string> Search { get; init; } = new();
+    public Dictionary<string, string> Lookup { get; init; } = new();
+    public Dictionary<string, string> Filter { get; init; } = new();
 }

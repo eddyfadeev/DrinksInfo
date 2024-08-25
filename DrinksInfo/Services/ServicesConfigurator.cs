@@ -1,8 +1,13 @@
 ﻿using DrinksInfo.Enums;
 using DrinksInfo.Handlers;
+using DrinksInfo.HttpManager;
 using DrinksInfo.Interfaces.Handlers;
+using DrinksInfo.Interfaces.HttpManager;
+using DrinksInfo.Interfaces.Mappers;
+using DrinksInfo.Interfaces.Resolvers;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Interfaces.View.Factory;
+using DrinksInfo.Mappers;
 using DrinksInfo.Models;
 using DrinksInfo.View;
 using DrinksInfo.View.Factory;
@@ -42,6 +47,9 @@ internal static class ServicesConfigurator
         services.AddSingleton<IMenuEntriesHandler<MainMenuEntries>, MenuEntriesHandler<MainMenuEntries>>();
         services.AddSingleton<IMenuEntriesHandler<FilterMenuEntries>, MenuEntriesHandler<FilterMenuEntries>>();
         services.AddSingleton<IMenuEntriesHandler<SearchMenuEntries>, MenuEntriesHandler<SearchMenuEntries>>();
+        
+        services.AddTransient<IUriResolver, UriResolver>();
+        services.AddTransient<IApiEndpointMapper, ApiEndpointMapper>();
     }
 
     private static IConfigurationBuilder GetConfiguration()

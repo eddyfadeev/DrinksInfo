@@ -1,5 +1,6 @@
 ﻿using DrinksInfo.Interfaces.View;
 using DrinksInfo.Models;
+using DrinksInfo.Resolvers;
 using Microsoft.Extensions.Options;
 
 namespace DrinksInfo.View.Commands.MainMenuCommands;
