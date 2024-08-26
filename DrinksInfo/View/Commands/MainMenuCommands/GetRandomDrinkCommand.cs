@@ -1,21 +1,26 @@
-﻿using DrinksInfo.Interfaces.View;
-using DrinksInfo.Models;
-using DrinksInfo.Resolvers;
-using Microsoft.Extensions.Options;
+﻿using DrinksInfo.Enums;
+using DrinksInfo.Interfaces.HttpManager;
+using DrinksInfo.Interfaces.View;
+using Spectre.Console;
 
 namespace DrinksInfo.View.Commands.MainMenuCommands;
 
 internal sealed class GetRandomDrinkCommand : ICommand
 {
-    private readonly IOptions<ApiConfig> _apiConfig;
-    
-    public GetRandomDrinkCommand(IOptions<ApiConfig> apiConfig)
+    private readonly IHttpManger _httpManger;
+    private readonly ITableConstructor _tableConstructor;
+    public GetRandomDrinkCommand(IHttpManger httpManger, ITableConstructor tableConstructor)
     {
-        _apiConfig = apiConfig;
+        _httpManger = httpManger;
+        _tableConstructor = tableConstructor;
     }
     
     public void Execute()
     {
-        throw new NotImplementedException();
+        var drinks = _httpManger.GetResponse(ApiEndpoints.Random.RandomCocktail);
+
+        var drinkTable = _tableConstructor.CreateDrinkTable(drinks[0]);
+        
+        AnsiConsole.Write(drinkTable);
     }
 }

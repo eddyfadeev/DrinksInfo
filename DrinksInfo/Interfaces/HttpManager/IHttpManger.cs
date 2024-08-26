@@ -1,7 +1,9 @@
-﻿namespace DrinksInfo.Interfaces.HttpManager;
+﻿using DrinksInfo.Models;
+
+namespace DrinksInfo.Interfaces.HttpManager;
 
 internal interface IHttpManger
 {
-    public string GetResponse<TApi>(TApi request, string? parameters = null)
+    public Drinks GetResponse<TApi>(TApi request, string? parameters = null)
         where TApi : Enum;
 }

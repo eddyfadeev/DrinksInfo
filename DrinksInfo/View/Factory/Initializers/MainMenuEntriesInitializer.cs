@@ -2,6 +2,7 @@
 using DrinksInfo.Enums;
 using DrinksInfo.Exceptions;
 using DrinksInfo.Interfaces.Handlers;
+using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View.Factory;
 using DrinksInfo.Models;
 using DrinksInfo.View.Commands.MainMenuCommands;
@@ -13,23 +14,26 @@ internal class MainMenuEntriesInitializer : IMenuEntriesInitializer<MainMenuEntr
 {
     private readonly IMenuEntriesHandler<SearchMenuEntries> _searchMenuEntriesHandler;
     private readonly IMenuEntriesHandler<FilterMenuEntries> _filterMenuEntriesHandler;
-    private readonly IOptions<ApiConfig> _apiConfig;
+    private readonly IHttpManger _httpManger;
+    private readonly ITableConstructor _tableConstructor;
     
     public MainMenuEntriesInitializer(
         IMenuEntriesHandler<SearchMenuEntries> searchMenuEntriesHandler, 
         IMenuEntriesHandler<FilterMenuEntries> filterMenuEntriesHandler,
-        IOptions<ApiConfig> apiConfig
+        IHttpManger httpManger,
+        ITableConstructor tableConstructor
         )
     {
         _searchMenuEntriesHandler = searchMenuEntriesHandler;
         _filterMenuEntriesHandler = filterMenuEntriesHandler;
-        _apiConfig = apiConfig;
+        _httpManger = httpManger;
+        _tableConstructor = tableConstructor;
     }
     
     public Dictionary<MainMenuEntries, Func<ICommand>> InitializeMenuEntries() =>
         new()
         {
-            { MainMenuEntries.GetRandom, () => new GetRandomDrinkCommand(_apiConfig) },
+            { MainMenuEntries.GetRandom, () => new GetRandomDrinkCommand(_httpManger, _tableConstructor) },
             { MainMenuEntries.SearchMenu, () => new OpenSearchCommand(_searchMenuEntriesHandler) }, 
             { MainMenuEntries.FiltersMenu, () => new OpenFilterByCommand(_filterMenuEntriesHandler) },
             { MainMenuEntries.Exit, () => throw new ExitApplicationException()}

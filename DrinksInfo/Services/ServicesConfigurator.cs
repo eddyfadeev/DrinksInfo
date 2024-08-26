@@ -50,6 +50,8 @@ internal static class ServicesConfigurator
         
         services.AddTransient<IUriResolver, UriResolver>();
         services.AddTransient<IApiEndpointMapper, ApiEndpointMapper>();
+        services.AddTransient<IHttpManger, HttpManager.HttpManager>();
+        services.AddTransient<ITableConstructor, TableConstructor>();
     }
 
     private static IConfigurationBuilder GetConfiguration()
