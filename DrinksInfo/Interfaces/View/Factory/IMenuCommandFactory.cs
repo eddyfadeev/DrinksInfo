@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace DrinksInfo.Interfaces.View.Factory;
+﻿namespace DrinksInfo.Interfaces.View.Factory;
 
 /// Represents a factory for creating menu commands.
 /// This interface allows the creation of menu commands based on a specified menu entry.

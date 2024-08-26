@@ -1,5 +1,8 @@
 ﻿namespace DrinksInfo.Interfaces.Model;
 
+/// <summary>
+/// Represents an interface for a drink.
+/// </summary>
 internal interface IDrink
 {
     internal string? DrinkId { get; set; }

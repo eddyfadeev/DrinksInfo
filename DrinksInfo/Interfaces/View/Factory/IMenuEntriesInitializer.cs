@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace DrinksInfo.Interfaces.View.Factory;
+﻿namespace DrinksInfo.Interfaces.View.Factory;
 
 /// <summary>
 /// Represents an interface for initializing menu entries for a specific menu type.
