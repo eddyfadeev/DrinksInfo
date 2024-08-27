@@ -19,6 +19,9 @@ The application is structured into several main components:
 9. **Exceptions**: Defines custom exceptions for handling specific error scenarios.
 10. **Program**: The entry point of the application, orchestrating the flow based on user interactions.
 
+## Diagram
+![alt text](https://github.com/eddyfadeev/DrinksInfo/blob/master/Drinks_Info_diagram.png?raw=true)
+
 ## Detailed Component Breakdown
 
 ### Models
