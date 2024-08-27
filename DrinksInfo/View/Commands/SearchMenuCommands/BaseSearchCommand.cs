@@ -24,7 +24,7 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
 
             if (propertyArray.Length == 0)
             {
-                AnsiConsole.MarkupLine("[red]No drinks found![/]");
+                AnsiConsole.MarkupLine(Messages.NoDrinksFound);
                 continue;
             }
 
@@ -34,7 +34,7 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
 
             if (IsBackOption(userChoice))
             {
-                continue;
+                break;
             }
 
             DisplayDrinkDetail(drink);

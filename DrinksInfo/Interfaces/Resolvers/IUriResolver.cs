@@ -1,6 +1,8 @@
 ﻿namespace DrinksInfo.Interfaces.Resolvers;
 
+/// <summary>
 /// Provides the interface for resolving URI for API endpoints.
+/// </summary>
 internal interface IUriResolver
 {
     /// <summary>

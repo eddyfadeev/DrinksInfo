@@ -2,6 +2,9 @@
 
 namespace DrinksInfo.Enums;
 
+/// <summary>
+/// Filter menu entries for the user to choose from.
+/// </summary>
 internal enum FilterMenuEntries
 {
     [Display(Name = "Filter by category")]

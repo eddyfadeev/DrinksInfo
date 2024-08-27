@@ -2,6 +2,7 @@
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Models;
+using DrinksInfo.Services;
 using Spectre.Console;
 
 namespace DrinksInfo.View.Commands;
@@ -35,6 +36,7 @@ internal abstract class BaseCommand<T> : ICommand
         var table = TableConstructor.CreateDrinkTable(drink);
 
         AnsiConsole.Write(table);
+        HelpService.WaitForEnter();
     }
     
     private protected static void HandleNoResults(string message) =>

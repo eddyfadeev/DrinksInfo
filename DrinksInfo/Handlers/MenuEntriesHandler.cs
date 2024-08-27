@@ -6,6 +6,10 @@ using Spectre.Console;
 
 namespace DrinksInfo.Handlers;
 
+/// <summary>
+/// Represents a handler for menu entries.
+/// </summary>
+/// <typeparam name="TMenu">The type of menu entries.</typeparam>
 internal class MenuEntriesHandler<TMenu> : IMenuEntriesHandler<TMenu>
     where TMenu : Enum
 {
@@ -16,7 +20,10 @@ internal class MenuEntriesHandler<TMenu> : IMenuEntriesHandler<TMenu>
         _menuEntries = menuEntries.GetMenuEntries();
         _menuCommandFactory = menuCommandFactory;
     }
-    
+
+    /// <summary>
+    /// Represents a method for handling the menu entries.
+    /// </summary>
     public void HandleMenu()
     {
         var userChoice = HandleUserChoice(_menuEntries);

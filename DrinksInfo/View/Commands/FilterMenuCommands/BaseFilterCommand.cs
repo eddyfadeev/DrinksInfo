@@ -1,10 +1,8 @@
-﻿using DrinksInfo.Enums;
-using DrinksInfo.Extensions;
+﻿using DrinksInfo.Extensions;
 using DrinksInfo.Handlers;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Models;
-using Spectre.Console;
 
 namespace DrinksInfo.View.Commands.FilterMenuCommands;
 
@@ -16,26 +14,22 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
 
     public override void Execute()
     {
-        while (true)
+        var userChoice = GetUserFilterChoice();
+        if (userChoice == null)
         {
-            var userChoice = GetUserFilterChoice();
-            if (userChoice == null)
-            {
-                break;
-            }
-            
-            var drinksCategories = FetchQuery(userChoice);
-            var drinkChoice = GetUserDrinkChoice(drinksCategories);
-            
-            if (drinkChoice == null)
-            {
-                continue;
-            }
-            
-            var drink = FetchDrink(drinkChoice);
-            DisplayDrinkDetail(drink);
-            break;
+            return;
         }
+        
+        var drinksCategories = FetchQuery(userChoice);
+        
+        var drinkChoice = GetUserDrinkChoice(drinksCategories);
+        if (drinkChoice == null)
+        {
+            return;
+        }
+        
+        var drink = FetchDrink(drinkChoice);
+        DisplayDrinkDetail(drink);
     }
     
     private protected abstract Drinks GetListOfFilters();
@@ -44,7 +38,7 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
     {
         var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);
         
-        return GetUserChoice(drinkNames, "No drinks found!");
+        return GetUserChoice(drinkNames, Messages.NoDrinksFound);
     }
     
     private static string? GetUserChoice(string[] options, string emptyMessage)

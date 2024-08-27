@@ -24,6 +24,4 @@ internal class Drinks: IDrinks
             return DrinksList[index];
         }
     }
-
-    public int Count => DrinksList.Count;
 }

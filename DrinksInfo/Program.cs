@@ -23,6 +23,13 @@ internal static class Program
             {
                 menuEntriesHandler.HandleMenu();
             }
+            catch (HttpRequestException ex)
+            {
+                AnsiConsole.MarkupLine(
+                    "[red]Problem with the connection to the server. Please try again later.[/]");
+                AnsiConsole.MarkupLine($"[red]{ ex.Message }[/]");
+                HelpService.WaitForEnter();
+            }
             catch (ReturnToPreviousMenuException)
             {
                 // return to the previous menu
@@ -32,21 +39,6 @@ internal static class Program
                 AnsiConsole.MarkupLine($"[white]{ ex.Message }[/]");
                 break;
             }
-            
-            WaitForEnter();
         }
-    }
-    
-    private static void WaitForEnter()
-    {
-        AnsiConsole.MarkupLine("[green]Press Enter to continue...[/]");
-        do
-        {
-            var keyPress = Console.ReadKey(true);
-            if (keyPress.Key == ConsoleKey.Enter)
-            {
-                break;
-            }
-        } while (true);
     }
 }

@@ -28,6 +28,7 @@ internal static class EnumExtensions
             .GetValues(typeof(TEntry))
             .Cast<TEntry>()
             .First(e => e.GetDisplayName() == displayName);
+    
     private static string GetDisplayName<TEntry>(this TEntry enumValue) where TEntry : Enum
     {
         var displayName = enumValue

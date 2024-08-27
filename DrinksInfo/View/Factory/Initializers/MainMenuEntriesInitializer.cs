@@ -4,9 +4,7 @@ using DrinksInfo.Exceptions;
 using DrinksInfo.Interfaces.Handlers;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View.Factory;
-using DrinksInfo.Models;
 using DrinksInfo.View.Commands.MainMenuCommands;
-using Microsoft.Extensions.Options;
 
 namespace DrinksInfo.View.Factory.Initializers;
 

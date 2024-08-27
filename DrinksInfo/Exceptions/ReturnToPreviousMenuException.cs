@@ -1,8 +1,13 @@
-﻿namespace DrinksInfo.Exceptions;
+﻿using DrinksInfo.View;
 
+namespace DrinksInfo.Exceptions;
+
+/// <summary>
+/// The class is used to throw an exception when the user wants to return to the previous menu.
+/// </summary>
 public class ReturnToPreviousMenuException : Exception
 {
-    public ReturnToPreviousMenuException() : base("Returning to the previous menu.")
+    public ReturnToPreviousMenuException() : base(Messages.ReturningToMainMenu)
     {
     }
     

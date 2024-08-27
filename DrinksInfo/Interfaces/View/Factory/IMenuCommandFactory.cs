@@ -1,7 +1,9 @@
 ﻿namespace DrinksInfo.Interfaces.View.Factory;
 
+/// <summary>
 /// Represents a factory for creating menu commands.
 /// This interface allows the creation of menu commands based on a specified menu entry.
+/// </summary>
 /// <typeparam name="TMenu">
 /// The type of the menu entries, which must be an enum
 /// </typeparam> 

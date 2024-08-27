@@ -4,7 +4,7 @@
 /// Represents an interface for handling menu entries.
 /// </summary>
 /// <typeparam name="TMenu">The type of menu entries.</typeparam>
-internal interface IMenuEntriesHandler<out TMenu>
+internal interface IMenuEntriesHandler<TMenu>
     where TMenu : Enum
 {
     /// <summary>

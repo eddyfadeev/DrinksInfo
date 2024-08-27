@@ -1,6 +1,5 @@
 ﻿using DrinksInfo.Enums;
 using DrinksInfo.Handlers;
-using DrinksInfo.HttpManager;
 using DrinksInfo.Interfaces.Handlers;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.Mappers;
@@ -9,6 +8,7 @@ using DrinksInfo.Interfaces.View;
 using DrinksInfo.Interfaces.View.Factory;
 using DrinksInfo.Mappers;
 using DrinksInfo.Models;
+using DrinksInfo.Resolvers;
 using DrinksInfo.View;
 using DrinksInfo.View.Factory;
 using DrinksInfo.View.Factory.Initializers;
@@ -19,8 +19,9 @@ namespace DrinksInfo.Services;
 
 internal static class ServicesConfigurator
 {
+    private const string JsonFileName = "appsettings.json";
     public static ServiceCollection ServiceCollection { get; } = new();
-    public static IConfiguration Configuration { get; }
+    private static IConfiguration Configuration { get; }
     
     static ServicesConfigurator()
     {
@@ -58,7 +59,7 @@ internal static class ServicesConfigurator
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile(JsonFileName, optional: false, reloadOnChange: true);
 
         return builder;
     }

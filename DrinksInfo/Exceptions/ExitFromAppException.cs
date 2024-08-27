@@ -1,8 +1,13 @@
-﻿namespace DrinksInfo.Exceptions;
+﻿using DrinksInfo.View;
 
+namespace DrinksInfo.Exceptions;
+
+/// <summary>
+/// The class is used to throw an exception when the application is exiting.
+/// </summary>
 public class ExitApplicationException : Exception
 {
-    public ExitApplicationException() : base("Exiting the application.")
+    public ExitApplicationException() : base(Messages.ExitingApplication)
     {
     }
     

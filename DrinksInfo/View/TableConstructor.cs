@@ -4,12 +4,21 @@ using Spectre.Console;
 
 namespace DrinksInfo.View;
 
+/// <summary>
+/// Represents a class for constructing tables to display information about drinks.
+/// </summary>
 internal sealed class TableConstructor : ITableConstructor
 {
+    private const string EmptyPlaceholder = "";
+    /// <summary>
+    /// Creates a table to display information about a drink.
+    /// </summary>
+    /// <param name="drink">The drink object containing the information to be displayed in the table.</param>
+    /// <returns>A Table object representing the constructed table.</returns>
     public Table CreateDrinkTable(Drink drink)
     {
-        var table = new Table();
-        table.AddColumn("");
+        var table = CreateTable();
+        table.AddColumn(EmptyPlaceholder);
         ConfigureMainTable(table);
         AddMainTableTitle(table, drink);
         AddSupportInfo(table, drink);
@@ -30,67 +39,82 @@ internal sealed class TableConstructor : ITableConstructor
     private static void AddMainTableTitle(Table table, Drink drink) => 
         table.Title(drink.DrinkName);
 
-    private static void InitializeSubTable(Table subTable, string title, int columns)
+    private static Table CreateTable() => new ();
+
+    private static Table InitializeSubTable(string title, int columns)
     {
-        subTable.Title(title);
-        subTable.HideHeaders();
-        subTable.Border(TableBorder.None);
-        subTable.Centered();
-        subTable.HideFooters();
+        var table = CreateTable();
+        table.Title(title);
+        table.HideHeaders();
+        table.Border(TableBorder.Rounded);
+        table.Centered();
+        table.HideFooters();
         
         for (var i = 0; i < columns; i++)
         {
-            subTable.AddColumn(new TableColumn(""));
+            table.AddColumn(new TableColumn(EmptyPlaceholder));
         }
+
+        return table;
     }
     
     private static void AddSupportInfo(Table table, Drink drink)
     {
+        const string supportInfoTitle = "Drink Information";
+        const string supportInfoCategory = "Category:";
+        const string supportInfoAlcoholic = "Alcoholic:";
+        const string supportInfoGlassType = "Glass Type:";
         const int supportInfoColumnsNum = 2;
-        var supportInfoTable = new Table();
-        InitializeSubTable(supportInfoTable, "Drink Information", supportInfoColumnsNum);
         
-        supportInfoTable.AddEmptyRow();
-        supportInfoTable.AddRow("Category:", drink.DrinkCategory);
-        supportInfoTable.AddRow("Alcoholic:", drink.IsAlcoholic);
-        supportInfoTable.AddRow("Glass Type:", drink.DrinkGlassType);
-
+        var supportInfoTable = InitializeSubTable(supportInfoTitle, supportInfoColumnsNum);
+        
+        supportInfoTable.AddRow(supportInfoCategory, drink.DrinkCategory);
+        supportInfoTable.AddRow(supportInfoAlcoholic, drink.IsAlcoholic);
+        supportInfoTable.AddRow(supportInfoGlassType, drink.DrinkGlassType);
+        
         table.AddRow(supportInfoTable);
     }
     
-    private static void AddIngredients(Table ingredientsTable, Drink drink)
+    private static Table AddIngredients(Drink drink)
     {
-        const int measuresColumnsNum = 1;
-        InitializeSubTable(ingredientsTable, "", measuresColumnsNum);
+        const int ingredientsColumnsNum = 1;
+        
+        var ingredientsTable = InitializeSubTable(EmptyPlaceholder, ingredientsColumnsNum);
+        ingredientsTable.ShowHeaders();
+        
         foreach (var ingredient in drink.Ingredients)
         {
             ingredientsTable.AddRow(ingredient);
         }
+        
+        return ingredientsTable;
     }
     
-    private static void AddMeasures(Table measuresTable, Drink drink)
+    private static Table AddMeasures(Drink drink)
     {
         const int measuresColumnsNum = 1;
-        InitializeSubTable(measuresTable, "", measuresColumnsNum);
+        
+        var measuresTable = InitializeSubTable(EmptyPlaceholder, measuresColumnsNum);
+        measuresTable.ShowHeaders();
+        
         foreach (var measure in drink.Measures)
         {
             measuresTable.AddRow(measure);
         }
+        
+        return measuresTable;
     }
 
     private static void AddIngredientsAndMeasures(Table table, Drink drink)
     {
+        const string ingredientsTitle = "Ingredients";
         const int ingredientsColumnsNum = 2;
-        var ingredientsAndMeasuresTable = new Table();
-        InitializeSubTable(ingredientsAndMeasuresTable, "Ingredients", ingredientsColumnsNum);
-
-        var ingredientsTable = new Table();
-        InitializeSubTable(ingredientsTable, "Ingredients", 1);
-        AddIngredients(ingredientsTable, drink);
-
-        var measuresTable = new Table();
-        AddMeasures(measuresTable, drink);
-
+        
+        var ingredientsAndMeasuresTable = InitializeSubTable(ingredientsTitle, ingredientsColumnsNum);
+        
+        var ingredientsTable = AddIngredients(drink);
+        var measuresTable = AddMeasures(drink);
+        
         ingredientsAndMeasuresTable.AddRow(measuresTable, ingredientsTable);
 
         table.AddRow(ingredientsAndMeasuresTable);
@@ -98,9 +122,10 @@ internal sealed class TableConstructor : ITableConstructor
     
     private static void AddInstructions(Table table, Drink drink)
     {
+        const string instructionsTitle = "Instructions";
         const int instructionsColumnsNum = 1;
-        var instructionsTable = new Table();
-        InitializeSubTable(instructionsTable, "Instructions", instructionsColumnsNum);
+        
+        var instructionsTable = InitializeSubTable(instructionsTitle, instructionsColumnsNum);
         
         instructionsTable.AddRow(drink.DrinkInstructions);
         

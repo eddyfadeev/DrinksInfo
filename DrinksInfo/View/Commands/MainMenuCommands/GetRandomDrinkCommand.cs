@@ -1,6 +1,7 @@
 ﻿using DrinksInfo.Enums;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
+using DrinksInfo.Services;
 using Spectre.Console;
 
 namespace DrinksInfo.View.Commands.MainMenuCommands;
@@ -22,5 +23,7 @@ internal sealed class GetRandomDrinkCommand : ICommand
         var drinkTable = _tableConstructor.CreateDrinkTable(drinks[0]);
         
         AnsiConsole.Write(drinkTable);
+        
+        HelpService.WaitForEnter();
     }
 }
