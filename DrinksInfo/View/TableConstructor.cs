@@ -46,7 +46,7 @@ internal sealed class TableConstructor : ITableConstructor
         var table = CreateTable();
         table.Title(title);
         table.HideHeaders();
-        table.Border(TableBorder.Rounded);
+        table.Border(TableBorder.None);
         table.Centered();
         table.HideFooters();
         
@@ -80,7 +80,6 @@ internal sealed class TableConstructor : ITableConstructor
         const int ingredientsColumnsNum = 1;
         
         var ingredientsTable = InitializeSubTable(EmptyPlaceholder, ingredientsColumnsNum);
-        ingredientsTable.ShowHeaders();
         
         foreach (var ingredient in drink.Ingredients)
         {
@@ -95,7 +94,6 @@ internal sealed class TableConstructor : ITableConstructor
         const int measuresColumnsNum = 1;
         
         var measuresTable = InitializeSubTable(EmptyPlaceholder, measuresColumnsNum);
-        measuresTable.ShowHeaders();
         
         foreach (var measure in drink.Measures)
         {
