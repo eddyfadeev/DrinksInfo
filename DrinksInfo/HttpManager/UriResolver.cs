@@ -23,7 +23,7 @@ internal class UriResolver : IUriResolver
         
         if (!string.IsNullOrEmpty(parameter))
         {
-            relativePath = string.Format(relativePath, parameter);
+            relativePath = string.Concat(relativePath, parameter);
         }
 
         return new Uri($"{_baseUrl}{relativePath}");

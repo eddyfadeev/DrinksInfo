@@ -91,7 +91,7 @@ internal sealed class TableConstructor : ITableConstructor
         var measuresTable = new Table();
         AddMeasures(measuresTable, drink);
 
-        ingredientsAndMeasuresTable.AddRow(ingredientsTable, measuresTable);
+        ingredientsAndMeasuresTable.AddRow(measuresTable, ingredientsTable);
 
         table.AddRow(ingredientsAndMeasuresTable);
     }

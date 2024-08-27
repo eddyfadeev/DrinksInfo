@@ -10,10 +10,6 @@ internal enum SearchMenuEntries
     SearchByName,
     [Display(Name = "Search by ingredient")]
     SearchByIngredient,
-    [Display(Name = "Search by category")]
-    SearchByCategory,
-    [Display(Name = "Search by glass type")]
-    SearchByGlassType,
     [Display(Name = "Back")]
     Back
 }
