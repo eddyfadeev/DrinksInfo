@@ -26,8 +26,16 @@ internal abstract class BaseCommand<T> : ICommand
     
     private protected abstract string[] FetchPropertyArray(Drinks drinks);
     
-    private protected Drinks FetchDrinksByFilter(ApiEndpoints.Filter filter, string input) =>
-        HttpManager.GetResponse(filter, input);
+    private protected Drink FetchDrink(string drinkName) =>
+        HttpManager
+            .GetResponse(ApiEndpoints.Search.CocktailByName, drinkName).DrinksList[0];
+    
+    private protected void DisplayDrinkDetail(Drink drink)
+    {
+        var table = TableConstructor.CreateDrinkTable(drink);
+
+        AnsiConsole.Write(table);
+    }
     
     private protected static void HandleNoResults(string message) =>
         AnsiConsole.MarkupLine($"[red]{message}[/]");

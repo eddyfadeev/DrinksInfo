@@ -40,18 +40,6 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
     
     private protected abstract Drinks GetListOfFilters();
     
-    private void DisplayDrinkDetail(Drink drink)
-    {
-        var table = TableConstructor.CreateDrinkTable(drink);
-
-        AnsiConsole.Write(table);
-    }
-
-    private Drink FetchDrink(string drinkName) =>
-        HttpManager
-            .GetResponse(ApiEndpoints.Search.CocktailByName, drinkName).DrinksList[0];
-
-    
     private static string? GetUserDrinkChoice(Drinks drinks)
     {
         var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);

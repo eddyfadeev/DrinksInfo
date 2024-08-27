@@ -21,8 +21,7 @@ internal class SearchMenuEntriesInitializer : IMenuEntriesInitializer<SearchMenu
     public Dictionary<SearchMenuEntries, Func<ICommand>> InitializeMenuEntries() =>
         new()
         {
-            { SearchMenuEntries.SearchByFirstLetter, () => new SearchByFirstLetterCommand(_httpManager, _tableConstructor) },
-            { SearchMenuEntries.SearchByName, () => new SearchByNameCommand() },
+            { SearchMenuEntries.SearchByName, () => new SearchByNameCommand(_httpManager, _tableConstructor) },
             { SearchMenuEntries.SearchByIngredient, () => new SearchByIngredientCommand(_httpManager, _tableConstructor) },
             { SearchMenuEntries.Back, () => throw new ReturnToPreviousMenuException() }
         };

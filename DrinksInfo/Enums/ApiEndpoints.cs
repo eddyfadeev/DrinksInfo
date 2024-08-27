@@ -4,7 +4,6 @@
 /// The <see cref="ApiEndpoints"/> class defines constants for various API endpoints used in the application.
 /// <seealso cref="Lists"/>
 /// <seealso cref="Search"/>
-/// <seealso cref="Lookup"/>
 /// <seealso cref="Filter"/>
 /// <seealso cref="Random"/>
 /// </summary>
@@ -16,7 +15,7 @@ internal static class ApiEndpoints
     /// <remarks>
     /// This enum is defined in the <see cref="DrinksInfo.Enums.ApiEndpoints"/> class 
     /// and is used to list the results of API queries by category,
-    /// ingredient, glass, or alcoholic option.
+    /// ingredient, glass, or alcohol option.
     /// </remarks>
     public enum Lists
     {
@@ -31,27 +30,12 @@ internal static class ApiEndpoints
     /// </summary>
     /// <remarks>
     /// This enum is defined in the <see cref="DrinksInfo.Enums.ApiEndpoints"/> class
-    /// and is used to search the results of API queries by cocktail name,
-    /// ingredient name, or the first letter of the cocktail.
+    /// and is used to search the results of API queries by cocktail name or ingredient name.
     /// </remarks>
     public enum Search
     {
         CocktailByName,
-        IngredientByName,
-        CocktailByFirstLetter
-    }
-
-    /// <summary>
-    /// Represents the available lookup options for querying the API.
-    /// </summary>
-    /// <remarks>
-    /// This enum is defined in the <see cref="DrinksInfo.Enums.ApiEndpoints"/> class
-    /// and is used to look up the results of API queries by cocktail id, or ingredient id.
-    /// </remarks>
-    public enum Lookup
-    {
-        CocktailById,
-        IngredientById
+        ByIngredientName
     }
 
     /// <summary>

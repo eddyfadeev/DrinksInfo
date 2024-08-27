@@ -35,7 +35,6 @@ internal class ApiEndpointMapper : IApiEndpointMapper
         {
             { typeof(ApiEndpoints.Lists), _apiConfig.Lists },
             { typeof(ApiEndpoints.Search), _apiConfig.Search },
-            { typeof(ApiEndpoints.Lookup), _apiConfig.Lookup },
             { typeof(ApiEndpoints.Filter), _apiConfig.Filter },
             { 
                 typeof(ApiEndpoints.Random), 

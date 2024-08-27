@@ -1,48 +1,49 @@
-﻿using DrinksInfo.Enums;
-using DrinksInfo.Extensions;
+﻿using DrinksInfo.Extensions;
 using DrinksInfo.Handlers;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Models;
-using DrinksInfo.Services;
 using Spectre.Console;
 
 namespace DrinksInfo.View.Commands.SearchMenuCommands;
 
-internal abstract class BaseSearchCommand<T> : BaseCommand<T>
+internal abstract class BaseSearchCommand : BaseCommand<string>
 {
     protected BaseSearchCommand(IHttpManger httpManager, ITableConstructor tableConstructor) : base(httpManager, tableConstructor)
     {
     }
     
-    private protected void DisplayDrinksDetail(Drinks drinks, string drinkName)
+    public override void Execute()
     {
-        var drink = drinks.DrinksList.First(d => d.DrinkName == drinkName);
-        var table = TableConstructor.CreateDrinkTable(drink);
+        while (true)
+        {
+            var userInput = GetUserInput();
+            var drinks = FetchQuery(userInput);
 
-        AnsiConsole.Write(table);
+            var propertyArray = FetchPropertyArray(drinks);
+
+            if (propertyArray.Length == 0)
+            {
+                AnsiConsole.MarkupLine("[red]No drinks found![/]");
+                continue;
+            }
+
+            var userChoice = DynamicEntriesHandler.HandleDynamicEntries(propertyArray);
+            
+            var drink = FetchDrink(userChoice);
+
+            if (IsBackOption(userChoice))
+            {
+                continue;
+            }
+
+            DisplayDrinkDetail(drink);
+            break;
+        }
     }
-
-    // private protected Drinks FetchDrinks(string drinkName) =>
-    //     HttpManager
-    //         .GetResponse(ApiEndpoints.Search.CocktailByName, drinkName);
     
-    private protected static T GetUserInput() => 
-        UserChoiceService.GetUserInput<T>(
-            "Enter the search query: ");
+    private protected abstract string GetUserInput(); 
     
-    // private protected static string? GetUserDrinkChoice(Drinks drinks)
-    // {
-    //     var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);
-    //         
-    //     if (drinkNames.Length == 0)
-    //     {
-    //         HandleNoResults("No drinks found!");
-    //         return null;
-    //     }
-    //         
-    //     var userChoice = DynamicEntriesHandler.HandleDynamicEntries(drinkNames);
-    //         
-    //     return IsBackOption(userChoice) ? null : userChoice;
-    // }
+    private protected override string[] FetchPropertyArray(Drinks drinks) =>
+        drinks.GetPropertyArray(d => d.DrinkName);
 }
