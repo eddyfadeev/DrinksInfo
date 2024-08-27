@@ -9,9 +9,9 @@ namespace DrinksInfo.View.Commands;
 
 internal abstract class BaseCommand<T> : ICommand
 {
-    private const string BackOption = "Back";
+    private protected const string BackOption = "Back";
     
-    private protected readonly ITableConstructor TableConstructor;
+    private readonly ITableConstructor TableConstructor;
     
     private protected readonly IHttpManger HttpManager;
     

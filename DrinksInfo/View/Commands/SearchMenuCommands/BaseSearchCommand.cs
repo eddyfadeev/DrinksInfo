@@ -29,13 +29,13 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
             }
 
             var userChoice = DynamicEntriesHandler.HandleDynamicEntries(propertyArray);
-            
-            var drink = FetchDrink(userChoice);
 
             if (IsBackOption(userChoice))
             {
-                break;
+                continue;
             }
+            
+            var drink = FetchDrink(userChoice);
 
             DisplayDrinkDetail(drink);
             break;
