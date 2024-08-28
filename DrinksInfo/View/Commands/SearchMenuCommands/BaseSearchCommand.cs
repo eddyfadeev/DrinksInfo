@@ -1,14 +1,13 @@
-﻿using DrinksInfo.Extensions;
-using DrinksInfo.Handlers;
-using DrinksInfo.Interfaces.HttpManager;
+﻿using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
-using DrinksInfo.Models;
-using Spectre.Console;
+using DrinksInfo.Services;
 
 namespace DrinksInfo.View.Commands.SearchMenuCommands;
 
 internal abstract class BaseSearchCommand : BaseCommand<string>
 {
+    private protected abstract string UserPrompt { get; }
+    
     protected BaseSearchCommand(IHttpManger httpManager, ITableConstructor tableConstructor) : base(httpManager, tableConstructor)
     {
     }
@@ -19,18 +18,9 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
         {
             var userInput = GetUserInput();
             var drinks = FetchQuery(userInput);
-
-            var propertyArray = FetchPropertyArray(drinks);
-
-            if (propertyArray.Length == 0)
-            {
-                AnsiConsole.MarkupLine(Messages.NoDrinksFound);
-                continue;
-            }
-
-            var userChoice = DynamicEntriesHandler.HandleDynamicEntries(propertyArray);
-
-            if (IsBackOption(userChoice))
+            
+            var userChoice = GetUserDrinkChoice(drinks);
+            if (userChoice == null)
             {
                 continue;
             }
@@ -42,8 +32,6 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
         }
     }
     
-    private protected abstract string GetUserInput(); 
-    
-    private protected override string[] FetchPropertyArray(Drinks drinks) =>
-        drinks.GetPropertyArray(d => d.DrinkName);
+    private string GetUserInput() => 
+        UserChoiceService.GetUserInput<string>(UserPrompt);
 }

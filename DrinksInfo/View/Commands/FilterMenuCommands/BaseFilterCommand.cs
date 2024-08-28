@@ -1,5 +1,4 @@
-﻿using DrinksInfo.Extensions;
-using DrinksInfo.Handlers;
+﻿using DrinksInfo.Handlers;
 using DrinksInfo.Interfaces.HttpManager;
 using DrinksInfo.Interfaces.View;
 using DrinksInfo.Models;
@@ -34,24 +33,7 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
     
     private protected abstract Drinks GetListOfFilters();
     
-    private static string? GetUserDrinkChoice(Drinks drinks)
-    {
-        var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);
-        
-        return GetUserChoice(drinkNames, Messages.NoDrinksFound);
-    }
-    
-    private static string? GetUserChoice(string[] options, string emptyMessage)
-    {
-        if (options.Length == 0)
-        {
-            HandleNoResults(emptyMessage);
-            return null;
-        }
-
-        var userChoice = DynamicEntriesHandler.HandleDynamicEntries(options);
-        return IsBackOption(userChoice) ? null : userChoice;
-    }
+    private protected abstract string[] FetchPropertyArray(Drinks drinks);
     
     private string? GetUserFilterChoice()
     {
